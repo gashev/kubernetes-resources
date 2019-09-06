@@ -39,12 +39,12 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: client
+  name: client-example
   labels:
-    app: client
+    app: client-example
 spec:
   containers:
-  - name: client
+  - name: client-example
     image: docker-local:5000/cli
 ---
 apiVersion: v1
