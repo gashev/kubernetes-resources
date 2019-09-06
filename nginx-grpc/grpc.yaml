@@ -125,19 +125,28 @@ spec:
     image: docker-local:5000/cli-hello-world
 
 ---
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: nginx-grpc
   labels:
     app: nginx-grpc
 spec:
-  containers:
-    - name: nginx-grpc
-      image: docker-local:5000/nginx-grpc
-      ports:
-        - containerPort: 50051
-          name: nginx-grpc
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-grpc
+  template:
+    metadata:
+      labels:
+        app: nginx-grpc
+    spec:
+      containers:
+        - name: nginx-grpc
+          image: docker-local:5000/nginx-grpc
+          ports:
+            - containerPort: 50051
+              name: nginx-grpc
 ---
 apiVersion: v1
 kind: Service
